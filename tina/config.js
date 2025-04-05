@@ -241,6 +241,142 @@ const schema = defineSchema({
         },
 
         {
+          type: "object",
+          fields: [
+            {
+              type: "string",
+              name: "en",
+              label: "English",
+            },
+            {
+              type: "string",
+              name: "es",
+              label: "Spanish",
+            },
+          ],
+          label: "Events Title 1",
+          name: "eventstitle1",
+        },
+        {
+          type: "object",
+          fields: [
+            {
+              type: "string",
+              name: "en",
+              label: "English",
+            },
+            {
+              type: "string",
+              name: "es",
+              label: "Spanish",
+            },
+          ],
+          label: "Events Title 2",
+          name: "eventstitle2",
+        },
+
+        {
+          label: "Events",
+          name: "events",
+          type: "object",
+          list: true,
+          ui: {
+            itemProps: (item) => {
+              return { label: `${item.name} (${item.date?.split("T")[0] || "No date"})` };
+            },
+            defaultItem: {
+              name: "Festival de Futaleufú",
+              date: "2025-01-15",
+              description: {
+                en: "Annual cultural festival in Futaleufú.",
+                es: "Festival cultural anual en Futaleufú.",
+              },
+              detailed_description: {
+                en: "The Futaleufú Festival celebrates the rich cultural traditions of the region with music, dance, and local cuisine.",
+                es: "El Festival de Futaleufú celebra las ricas tradiciones culturales de la región con música, danza y gastronomía local.",
+              },
+              image: "/uploads/festival.png",
+            },
+            // ⭐ Sort Events by date (soonest first)
+            listProps: {
+              sort: (a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return dateA - dateB;
+              },
+            },
+          },
+          
+          fields: [
+            {
+              label: "Name",
+              name: "name",
+              type: "string",
+            },
+            {
+              label: "Date",
+              name: "date",
+              type: "datetime",
+              ui: {
+                dateFormat: "YYYY-MM-DD", // Only show the date (optional)
+                timeFormat: false,
+              },
+            },
+            {
+              label: "Description",
+              name: "description",
+              type: "object",
+              fields: [
+                {
+                  type: "string",
+                  name: "en",
+                  label: "English",
+                },
+                {
+                  type: "string",
+                  name: "es",
+                  label: "Spanish",
+                },
+              ],
+            },
+            {
+              label: "Detailed Description",
+              name: "detailed_description",
+              type: "object",
+              fields: [
+                {
+                  type: "string",
+                  name: "en",
+                  label: "English",
+                  ui: {
+                    component: "textarea",
+                  },
+                },
+                {
+                  type: "string",
+                  name: "es",
+                  label: "Spanish",
+                  ui: {
+                    component: "textarea",
+                  },
+                },
+              ],
+            },
+            {
+              type: "image",
+              label: "Image",
+              name: "image",
+              required: true,
+            },
+          ],
+        }
+,        
+
+
+
+
+
+        {
           label: "Fotos",
           name: "fotos",
           type: "object",
