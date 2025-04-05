@@ -107,7 +107,7 @@ export default function NavBar({ props, locale }) {
           <Link href="#services" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
             {menu.services}
           </Link>
-          <Link href="#rentals" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
+          <Link target="_blank" href="https://www.airbnb.cl/rooms/11544582" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
             {menu.rentals}
           </Link>
           <Link href="#contact" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700">
