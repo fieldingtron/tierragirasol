@@ -19,7 +19,7 @@ const Testimonials = ({ props, locale }) => {
   return (
     <section
       id="testimonials"
-      className="py-12  bg-no-repeat bg-right-bottom bg-fixed md:bg-alpaca"
+      className="py-12  bg-no-repeat bg-[position:right_center] bg-fixed md:bg-sunflower"
     >
       <div className="container mx-auto px-4 text-center">
         <h2

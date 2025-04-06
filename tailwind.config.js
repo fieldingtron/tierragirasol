@@ -20,6 +20,7 @@ module.exports = {
         "martin-pescador": "url('/images/martin-pescador.png')",
         araucaria: "url('/images/araucarias1_bckgr.png')",
         alpaca: "url('/images/alpaca-small.png')",
+        sunflower: "url('/images/sunflower.png')",
       }),
 
       colors: {
