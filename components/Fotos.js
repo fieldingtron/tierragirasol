@@ -6,7 +6,7 @@ import Heading from "./Heading";
 export default function Fotos({ props }) {
   const fotos = props.fotos; //name imgSrc
   return (
-    <section className="dark:bg-darkBlue bg-gray-200" id="fotos">
+    <section className="" id="fotos">
       <div className="container mx-auto p-6 lg:mb-0">
         <Heading text="Fotos" />
 

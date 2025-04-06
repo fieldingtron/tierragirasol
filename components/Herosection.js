@@ -12,7 +12,6 @@ const HeroSection = ({ props, locale }) => {
     <section
       id="home"
       className={`${poppins.className} relative min-h-[100vh] flex items-center justify-center bg-cover bg-scroll bg-center`}
-      // className="relative min-h-[80vh] flex items-center justify-center bg-cover bg-scroll bg-center"
       style={{
         backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("${props.landingImageSrc}")`,
         backgroundRepeat: "no-repeat",

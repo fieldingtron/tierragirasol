@@ -54,11 +54,11 @@ export default function Contact({ locale }) {
 
   return (
     <section
-      className="dark:bg-darkBlue3 bg-alt2 bg-no-repeat bg-right-bottom bg-araucaria"
+      className=" bg-no-repeat bg-right-bottom bg-araucaria"
       id="contact"
     >
       <Heading text={form.title} />
-      <div className="container mx-auto my-1 py-1">
+      <div className="container mx-auto  py-1">
         <div className="w-full max-w-2xl mx-auto my-2">
           <div className="p-6 border rounded-md">
             {response ? (

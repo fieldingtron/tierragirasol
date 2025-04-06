@@ -151,3 +151,12 @@
   font-size: 1.1rem;
   font-weight: bold;
 }
+
+
+main section:nth-child(odd) {
+  @apply   bg-gray-100 text-gray-800 dark:bg-darkBlue1 dark:text-white;
+}
+
+main section:nth-child(even) {
+  @apply   bg-white text-gray-800 dark:bg-darkBlue2 dark:text-white;
+}

@@ -7,7 +7,7 @@ export default function FAQ({ props, locale }) {
   //console.log(props.faq);
   return (
     <section
-      className="dark:bg-darkBlue2 bg-gray-200 bg-fixed bg-no-repeat bg-right-bottom md:bg-martin-pescador"
+      className=" bg-fixed bg-no-repeat bg-right-bottom md:bg-martin-pescador"
       id="lineUp"
     >
       <div className="container mx-auto p-6 lg:mb-0">

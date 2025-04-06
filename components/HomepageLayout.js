@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import Script from "next/script";
 import Contact from "./Contact";
 import HeroSection from "./Herosection";
-import AboutSection from "./AboutSection";
+import Footerz from "./Footerz"
 import EventsSection from "./EventsSection";
 import ServicesSection from "./ServicesSection";
 import FAQ from "./FAQ";
@@ -25,9 +25,10 @@ export const HomepageLayout = ({ props, locale }) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <main>
+
       <NavBar props={props} locale={locale} />
       <HeroSection props={props} locale={locale} />
-      {/* <AboutSection props={props} locale={locale} /> */}
       <EventsSection props={props} locale={locale} />
       <ServicesSection props={props} locale={locale} />
       <Fotos props={props} locale={locale} />
@@ -37,9 +38,11 @@ export const HomepageLayout = ({ props, locale }) => {
       <Contact locale={locale} />
       <ModalTours props={props} locale={locale} />
       <ModalEvents props={{ events: props.events }} locale={locale} />
+      <Footerz/>
+
+      </main>
 
 
-      <footer></footer>
       <Script src="/js/tw-elements.umd.min.js" strategy="lazyOnload" />
     </>
   );

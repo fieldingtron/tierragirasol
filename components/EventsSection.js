@@ -5,7 +5,7 @@ export default function EventsSection({ props, locale }) {
   return (
     <section
       id="events"
-      className="py-16 bg-gray-100 text-gray-800 dark:bg-darkBlue3 dark:text-white bg-fixed bg-no-repeat bg-right-bottom md:bg-martin-pescador capitalize"
+      className="py-16 bg-fixed bg-no-repeat bg-right-bottom md:bg-martin-pescador capitalize"
     >
       <div className="container mx-auto px-4">
         {/* Section Title */}
