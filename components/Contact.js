@@ -35,11 +35,14 @@ export default function Contact({ locale }) {
 
   async function submitForm(data) {
     const EMAIL_URL = process.env.NEXT_PUBLIC_EMAIL_URL;
+    const CF7_FORM_ID = process.env.NEXT_PUBLIC_CF7_FORM_ID;
+    const CF7_UNIT_TAG = process.env.NEXT_PUBLIC_CF7_UNIT_TAG;
 
     try {
+      if (!EMAIL_URL || !CF7_FORM_ID || !CF7_UNIT_TAG) throw new Error("Missing environment variables");
       const formData = new FormData();
-      formData.append("_wpcf7", "345"); // Replace with your CF7 form ID
-      formData.append("_wpcf7_unit_tag", "796b56d"); // Replace with your CF7 unit tag
+      formData.append("_wpcf7", CF7_FORM_ID);
+      formData.append("_wpcf7_unit_tag", CF7_UNIT_TAG);
       formData.append("yname", data["your-name"]);
       formData.append("yemail", data["your-email"]);
       formData.append("ymessage", data["your-message"]);
