@@ -593,8 +593,7 @@ const schema = defineSchema({
   ],
 });
 
-const { LimitedGithubMediaStore } = require("./media/CustomMediaStore");
-
+const { LimitedSizeMediaStore } = require("./media/CustomMediaStore");
 
 const config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
@@ -604,8 +603,10 @@ const config = defineConfig({
     process.env.HEAD,
   token: process.env.TINA_TOKEN,
   media: {
-    loadCustomStore: async () => {
-      return new LimitedGithubMediaStore();
+    loadCustomStore: async (args) => {
+      const originalStore = await args.originalMediaStore.load();
+      const cms = args.cms; // <-- get TinaCMS instance
+      return new LimitedSizeMediaStore(originalStore, cms);
     },
   },
   build: {
