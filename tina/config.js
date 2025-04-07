@@ -608,8 +608,9 @@ export const config = defineConfig({
     // },
     // this is the config for the tina cloud media store
     tina: {
-      publicFolder: "public",
-      mediaRoot: "uploads",
+      publicFolder: 'public',
+      mediaRoot: 'uploads',
+      maxFileSize: 1000000, // Limit file size to 1MB
     },
   },
   build: {
