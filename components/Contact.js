@@ -38,8 +38,8 @@ export default function Contact({ locale }) {
 
     try {
       const formData = new FormData();
-      formData.append("_wpcf7", "327"); // Replace with your CF7 form ID
-      formData.append("_wpcf7_unit_tag", "d409a3d"); // Replace with your CF7 unit tag
+      formData.append("_wpcf7", "345"); // Replace with your CF7 form ID
+      formData.append("_wpcf7_unit_tag", "796b56d"); // Replace with your CF7 unit tag
       formData.append("yname", data["your-name"]);
       formData.append("yemail", data["your-email"]);
       formData.append("ymessage", data["your-message"]);
