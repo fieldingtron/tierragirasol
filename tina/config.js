@@ -120,12 +120,6 @@ const schema = defineSchema({
           required: true, // Makes this field required
         },
 
-       
-       
-      
-
-       
-
         {
           type: "object",
           fields: [
@@ -282,7 +276,11 @@ const schema = defineSchema({
           list: true,
           ui: {
             itemProps: (item) => {
-              return { label: `${item.name} (${item.date?.split("T")[0] || "No date"})` };
+              return {
+                label: `${item.name} (${
+                  item.date?.split("T")[0] || "No date"
+                })`,
+              };
             },
             defaultItem: {
               name: "Festival de Futaleufú",
@@ -306,7 +304,7 @@ const schema = defineSchema({
               },
             },
           },
-          
+
           fields: [
             {
               label: "Name",
@@ -369,13 +367,7 @@ const schema = defineSchema({
               required: true,
             },
           ],
-        }
-,        
-
-
-
-
-
+        },
         {
           label: "Fotos",
           name: "fotos",
@@ -618,6 +610,7 @@ export const config = defineConfig({
     tina: {
       publicFolder: "public",
       mediaRoot: "uploads",
+      maxFileSize: 1024 * 1024, // 1 MB in bytes
     },
   },
   build: {
