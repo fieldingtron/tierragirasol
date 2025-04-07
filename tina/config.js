@@ -610,7 +610,7 @@ export const config = defineConfig({
     tina: {
       publicFolder: 'public',
       mediaRoot: 'uploads',
-      maxFileSize: 1000000, // Limit file size to 1MB
+      // maxFileSize: 1000000, // Limit file size to 1MB
     },
   },
   build: {
