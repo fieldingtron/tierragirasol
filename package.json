@@ -11,6 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tinacms/auth": "^1.0.12",
     "@vercel/analytics": "^1.5.0",
     "aos": "^2.3.4",
     "axios": "^1.7.9",
@@ -18,15 +19,18 @@
     "encrypted-env": "^0.2.1",
     "formdata-node": "^6.0.3",
     "formidable": "^3.5.2",
+    "fs": "^0.0.1-security",
     "imagemin": "^9.0.1",
     "imagemin-mozjpeg": "^10.0.0",
     "imagemin-pngquant": "^10.0.0",
     "next": "^15.0.2",
+    "next-tinacms-cloudinary": "^13.0.5",
+    "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.1",
     "react-markdown": "^9.1.0",
-    "sharp": "^0.34.0",
+    "sharp": "^0.34.1",
     "tinacms": "^2.4.0",
     "tw-elements": "1.0.0"
   },

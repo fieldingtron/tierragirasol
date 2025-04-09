@@ -1,5 +1,5 @@
 // Install first:
-// npm install sharp fs path cli-progress
+// npm yarn add sharp fs path cli-progress
 
 const sharp = require('sharp');
 const fs = require('fs');
