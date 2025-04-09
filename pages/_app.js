@@ -4,7 +4,7 @@ import React from "react";
 if (typeof window === "undefined") {
   React.useLayoutEffect = React.useEffect;
 }
-
+import { Analytics } from '@vercel/analytics/next';
 import "./global.css";
 import { useEffect } from "react";
 import AOS from "aos";
@@ -20,6 +20,8 @@ const App = ({ Component, pageProps }) => {
   return (
     <>
       <Component {...pageProps} />
+      <Analytics />
+
     </>
   );
 };
