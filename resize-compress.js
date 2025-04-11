@@ -88,4 +88,33 @@ async function processImage(filePath) {
 
   fs.writeFileSync(outputPath, buffer);
 
-  console.log(`Optimized ${outputPath}:
+  console.log(`Optimized ${outputPath}:`);
+  console.log(`Original size: ${originalSize} bytes, Resized size: ${resizedSize} bytes`);
+
+  // Update the optimization database
+  optimizedDB[filePath] = hash;
+  fs.writeFileSync(dbPath, JSON.stringify(optimizedDB, null, 2));
+}
+
+async function processDirectory(directory) {
+  const files = fs.readdirSync(directory);
+  for (const file of files) {
+    const filePath = path.join(directory, file);
+    const stat = fs.statSync(filePath);
+
+    if (stat.isDirectory()) {
+      await processDirectory(filePath);
+    } else {
+      await processImage(filePath);
+    }
+  }
+}
+
+(async () => {
+  try {
+    await processDirectory(inputDir);
+    console.log('Image optimization complete.');
+  } catch (error) {
+    console.error('Error during image optimization:', error);
+  }
+})();
