@@ -72,19 +72,12 @@ async function processImage(filePath) {
     if (webpBuffer.length < resizedSize * 0.9) {
       // WebP saves at least 10%
       buffer = webpBuffer;
-      finalFormat = 'webp';
       console.log(`Switched to WebP for ${filePath}`);
     }
   }
 
   // Determine output file path
   let outputPath = filePath;
-  if (finalFormat === 'webp' && ext !== '.webp') {
-    outputPath = filePath.replace(/\.(jpg|jpeg|png)$/i, '.webp');
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
-    }
-  }
 
   fs.writeFileSync(outputPath, buffer);
 
