@@ -14,6 +14,11 @@ if (fs.existsSync(dbPath)) {
   optimizedDB = JSON.parse(fs.readFileSync(dbPath));
 }
 
+function normalizePath(filePath) {
+  // Convert Windows backslashes to forward slashes
+  return filePath.replace(/\\/g, '/');
+}
+
 function getFileHash(filePath) {
   const fileBuffer = fs.readFileSync(filePath);
   return crypto.createHash('md5').update(fileBuffer).digest('hex');
@@ -28,8 +33,9 @@ async function processImage(filePath) {
     return;
   }
 
+  const normalizedPath = normalizePath(filePath);
   const hash = getFileHash(filePath);
-  if (optimizedDB[filePath] === hash) {
+  if (optimizedDB[normalizedPath] === hash) {
     console.log(`Already optimized, skipping: ${filePath}`);
     return;
   }
@@ -78,14 +84,13 @@ async function processImage(filePath) {
 
   // Determine output file path
   let outputPath = filePath;
-
   fs.writeFileSync(outputPath, buffer);
 
   console.log(`Optimized ${outputPath}:`);
   console.log(`Original size: ${originalSize} bytes, Resized size: ${resizedSize} bytes`);
 
   // Update the optimization database with the hash of the optimized file
-  optimizedDB[filePath] = getFileHash(outputPath);
+  optimizedDB[normalizedPath] = getFileHash(outputPath);
   fs.writeFileSync(dbPath, JSON.stringify(optimizedDB, null, 2));
 }
 
