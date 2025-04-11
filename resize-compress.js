@@ -84,8 +84,8 @@ async function processImage(filePath) {
   console.log(`Optimized ${outputPath}:`);
   console.log(`Original size: ${originalSize} bytes, Resized size: ${resizedSize} bytes`);
 
-  // Update the optimization database
-  optimizedDB[filePath] = hash;
+  // Update the optimization database with the hash of the optimized file
+  optimizedDB[filePath] = getFileHash(outputPath);
   fs.writeFileSync(dbPath, JSON.stringify(optimizedDB, null, 2));
 }
 
