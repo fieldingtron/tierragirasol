@@ -58,6 +58,10 @@ export default function NavBar({ props, locale }) {
     setMenuOpen((prev) => !prev);
   };
 
+  const handleLinkClick = () => {
+    setMenuOpen(false);
+  };
+
   const changeLocale = () => {
     const newLocale = currentLocale === "en" ? "es" : "en";
     router.push(router.pathname, router.asPath, { locale: newLocale });
@@ -98,22 +102,22 @@ export default function NavBar({ props, locale }) {
 
         {/* Menu */}
         <div className={`flex-col lg:flex-row lg:flex items-center space-y-4 lg:space-y-0 lg:space-x-6 absolute lg:static top-16 left-0 w-full lg:w-auto bg-white dark:bg-gray-900 shadow-md lg:shadow-none ${menuOpen ? "flex" : "hidden"}`}>
-          <Link href="#home" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
+          <Link href="#home" onClick={handleLinkClick} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
             {menu.home}
           </Link>
-          <Link href="#events" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
+          <Link href="#events" onClick={handleLinkClick} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
             {menu.events}
           </Link>
-          <Link href="#services" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
+          <Link href="#services" onClick={handleLinkClick} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
             {menu.services}
           </Link>
-          <Link target="_blank" href="https://www.airbnb.cl/rooms/11544582" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
+          <Link target="_blank" href="https://www.airbnb.cl/rooms/11544582" onClick={handleLinkClick} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
             {menu.rentals}
           </Link>
-          <Link href="#contact" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700">
+          <Link href="#contact" onClick={handleLinkClick} className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700">
             {menu.contact}
           </Link>
-          <Link href="https://www.instagram.com/tierra.girasol/" target="_blank" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
+          <Link href="https://www.instagram.com/tierra.girasol/" target="_blank" onClick={handleLinkClick} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2 lg:py-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
