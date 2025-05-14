@@ -1,4 +1,18 @@
 import { defineConfig, defineSchema } from "tinacms";
+import { sanitizeFilename } from "../utils/sanitizeFilename";
+
+// Define custom media store
+const customMediaStore = {
+  async persist(media) {
+    const sanitizedFilename = sanitizeFilename(media.filename);
+    // Update the filename and directory in the media object
+    media.filename = sanitizedFilename;
+    if (media.directory) {
+      media.directory = media.directory.toLowerCase();
+    }
+    return media;
+  },
+};
 
 const headingBlock = {
   name: "Heading",
@@ -596,21 +610,30 @@ const schema = defineSchema({
 export const config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
   branch:
-    process.env.NEXT_PUBLIC_TINA_BRANCH || // custom branch env override
-    process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || // Vercel branch env
-    process.env.HEAD, // Netlify branch env
+    process.env.NEXT_PUBLIC_TINA_BRANCH ||
+    process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF ||
+    process.env.HEAD,
   token: process.env.TINA_TOKEN,
   media: {
-    // If you wanted cloudinary do this
-    // loadCustomStore: async () => {
-    //   const pack = await import("next-tinacms-cloudinary");
-    //   return pack.TinaCloudCloudinaryMediaStore;
-    // },
-    // this is the config for the tina cloud media store
     tina: {
-      publicFolder: 'public',
-      mediaRoot: 'uploads',
-      // maxFileSize: 1000000, // Limit file size to 1MB
+      publicFolder: "public",
+      mediaRoot: "uploads",
+      previewSrc: (fullSrc) => fullSrc,
+    },
+    loadCustomStore: async () => {
+      return {
+        async preProcessFile(file) {
+          const sanitizedName = sanitizeFilename(file.name);
+          return new File([file], sanitizedName, { type: file.type });
+        },
+        ...customMediaStore,
+      };
+    },
+  },
+  search: {
+    tina: {
+      indexerToken: process.env.TINA_TOKEN,
+      stopwordLanguages: ["eng", "spa"],
     },
   },
   build: {
@@ -619,6 +642,5 @@ export const config = defineConfig({
   },
   schema,
 });
-
 
 export default config;
