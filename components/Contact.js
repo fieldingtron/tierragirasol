@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import Heading from "./Heading";
 
@@ -26,50 +25,61 @@ const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP ?? "+56942464565";
 export default function Contact({ locale }) {
   const form = contactform[locale];
   const [response, setResponse] = useState(false);
+  const [error, setError] = useState("");
 
   const {
     register,
     handleSubmit,
     formState: { isSubmitting },
+    reset,
   } = useForm();
 
   async function submitForm(data) {
-    const EMAIL_URL = process.env.NEXT_PUBLIC_EMAIL_URL;
-    const CF7_FORM_ID = process.env.NEXT_PUBLIC_CF7_FORM_ID;
-    const CF7_UNIT_TAG = process.env.NEXT_PUBLIC_CF7_UNIT_TAG;
-
     try {
-      if (!EMAIL_URL || !CF7_FORM_ID || !CF7_UNIT_TAG) throw new Error("Missing environment variables");
-      const formData = new FormData();
-      formData.append("_wpcf7", CF7_FORM_ID);
-      formData.append("_wpcf7_unit_tag", CF7_UNIT_TAG);
-      formData.append("yname", data["your-name"]);
-      formData.append("yemail", data["your-email"]);
-      formData.append("ymessage", data["your-message"]);
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "your-name": data["your-name"],
+          "your-email": data["your-email"],
+          "your-message": data["your-message"],
+        }),
+      });
 
-      await axios.post(EMAIL_URL, formData);
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Something went wrong");
+      }
+
       setResponse(true);
+      reset();
+      setError("");
     } catch (error) {
       console.error("Form submission error: ", error);
-      alert("Something went wrong. Please try again.");
+      setError(error.message || "Something went wrong. Please try again.");
     }
   }
 
   return (
-    <section
-      className=" bg-no-repeat bg-right-bottom bg-araucaria"
-      id="contact"
-    >
+    <section className="bg-no-repeat bg-right-bottom bg-araucaria" id="contact">
       <Heading text={form.title} />
-      <div className="container mx-auto  py-1">
+      <div className="container mx-auto py-1">
         <div className="w-full max-w-2xl mx-auto my-2">
           <div className="p-6 border rounded-md">
             {response ? (
-              <h2 className="p-6 text-5xl text-red-600 text-center font-extrabold">
-                ENVIADO
+              <h2 className="p-6 text-5xl text-green-600 text-center font-extrabold">
+                {form.sent}
               </h2>
             ) : (
               <form method="post" onSubmit={handleSubmit(submitForm)}>
+                {error && (
+                  <div className="mb-4 p-4 text-red-700 bg-red-100 rounded-md">
+                    {error}
+                  </div>
+                )}
                 <label className="block mb-6">
                   <span>{form.name}</span>
                   <input
