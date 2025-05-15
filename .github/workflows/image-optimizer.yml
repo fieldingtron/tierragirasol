@@ -27,6 +27,9 @@ jobs:
       - name: Run image optimizer
         run: node resize-compress.js
 
+      - name: Rename and sanitize images
+        run: node rename-images.js
+
       - name: Commit optimized images
         run: |
           git config --global user.name 'github-actions[bot]'
