@@ -22,6 +22,26 @@ const headingBlock = {
       heading: "Lorem ipsum dolo",
     },
   },
+  media: {
+    tina: {
+      publicFolder: "public",
+      mediaRoot: "uploads",
+    },
+    loadCustomStore: async () => {
+      return {
+        async persist(media) {
+          const sanitizedFilename = sanitizeFilename(media.filename);
+          media.filename = sanitizedFilename;
+          return media;
+        },
+        async preProcessFile(file) {
+          const sanitizedName = sanitizeFilename(file.name);
+          const newFile = new File([file], sanitizedName, { type: file.type });
+          return newFile;
+        },
+      };
+    },
+  },
   fields: [
     {
       type: "string",
@@ -621,11 +641,16 @@ export const config = defineConfig({
     },
     loadCustomStore: async () => {
       return {
+        async persist(media) {
+          const sanitizedFilename = sanitizeFilename(media.filename);
+          media.filename = sanitizedFilename;
+          return media;
+        },
         async preProcessFile(file) {
           const sanitizedName = sanitizeFilename(file.name);
-          return new File([file], sanitizedName, { type: file.type });
+          const newFile = new File([file], sanitizedName, { type: file.type });
+          return newFile;
         },
-        ...customMediaStore,
       };
     },
   },
