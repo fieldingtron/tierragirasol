@@ -629,12 +629,6 @@ export const config = defineConfig({
       };
     },
   },
-  search: {
-    tina: {
-      indexerToken: process.env.TINA_TOKEN,
-      stopwordLanguages: ["eng", "spa"],
-    },
-  },
   build: {
     publicFolder: "public", // The public asset folder for your framework
     outputFolder: "admin", // within the public folder
