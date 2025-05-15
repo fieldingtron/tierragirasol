@@ -618,7 +618,6 @@ export const config = defineConfig({
     tina: {
       publicFolder: "public",
       mediaRoot: "uploads",
-      previewSrc: (fullSrc) => fullSrc,
     },
     loadCustomStore: async () => {
       return {
