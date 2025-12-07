@@ -10,6 +10,8 @@ on:
 
 jobs:
   optimize-images:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
 
     steps:
